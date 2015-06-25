@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Enersales</title>
+
+	<!-- FOR ANGULAR ROUTING -->
+	<base href="/">
+
+	<!--CSS-->
+	<link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- JS / LIBS -->
+	<script src="assets/libs/angular/angular.min.js"></script>
+	<script src="assets/libs/angular-route/angular-route.min.js"></script>
+	<script src="assets/libs/angular-animate/angular-animate.min.js"></script>
+
+	<!-- controllers -->
+	<script src="app/controllers/mainCtrl.js"></script>
+	<script src="app/controllers/userCtrl.js"></script>
+	<script src="app/controllers/saleCtrl.js"></script>
+
+	<!-- services -->
+	<script src="app/services/authService.js"></script>
+	<script src="app/services/userService.js"></script>
+	<script src="app/services/saleService.js"></script>
+
+	<!-- main Angular app files -->
+	<script src="app/app.routes.js"></script>
+	<script src="app/app.js"></script>
+</head>
+<body ng-app="saleApp" ng-controller="mainController as main">
+
+<!-- NAVBAR -->
+<header>
+	<div class="navbar navbar-inverse" ng-if="main.loggedIn">
+	<div class="container">
+		<div class="navbar-header">
+			<a href="/" class="navbar-brand"><span class="glyphicon glyphicon-globe"></span> Enersales</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Dashboard</a></li>
+			<li><a href="/sales"><span class="glyphicon glyphicon-briefcase"></span> Sales</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+			<li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+			<li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
+			<li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+		</ul>
+	</div>
+	</div>
+</header>
+
+<main class="container">
+	<!-- ANGULAR VIEWS -->
+	<div ng-view></div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<div class="page-header">
+	<h1 ng-if="sale.type == 'create'">Create Sale</h1>
+	<h1 ng-if="sale.type == 'edit'">Edit Sale</h1>
+</div>
+
+<form class="form-horizontal" ng-submit="sale.saveSale()">
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">PO Number</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.poNumber">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Customer</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.customer">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Value ($)</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.value">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Salesman</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.salesman">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Quote Number</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.quoteNumber">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Meeting Date</label>
+		<div class="col-sm-6">
+			<input type="date" class="form-control" ng-model="sale.saleData.meetingDate">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Project Manager</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.projectManager">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Description</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" ng-model="sale.saleData.description">
+		</div>
+	</div>
+
+
+	<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-6">
+		<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'create'">Create Sale</button>
+		<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'edit'">Update Sale</button>
+	</div>
+	</div>
+
+</form>
+
+<div class="row show-hide-message" ng-show="sale.message">
+	<div class="col-sm-6 col-sm-offset-2">
+
+		<div class="alert alert-info">
+			{{ sale.message }}
+		</div>
+
+	</div>
+</div>

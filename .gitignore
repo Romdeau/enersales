@@ -1,0 +1,10 @@
+# Ignore packages
+/node_modules
+/bower_components
+/public/assets/libs
+
+# Ignore the config file so environment secret doesnt leak out.
+config.js
+
+# Ignore other unneeded files.
+.DS_Store
