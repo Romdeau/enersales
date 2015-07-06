@@ -5,7 +5,7 @@ angular.module('saleService', [])
 	// create a new object
 	var saleFactory = {};
 
-	// get a single sale 
+	// get a single sale
 	saleFactory.get = function(id) {
 		return $http.get('/api/sales/' + id);
 	};
@@ -28,6 +28,11 @@ angular.module('saleService', [])
 	// delete a sale
 	saleFactory.delete = function(id) {
 		return $http.delete('/api/sales/' + id);
+	};
+
+	// send an email
+	saleFactory.emailNotification = function(mailData) {
+		return $http.post('/api/email/', mailData);
 	};
 
 	// return our entire saleFactory object

@@ -1,82 +1,34 @@
-<div class="page-header">
-	<h1 ng-if="sale.type == 'create'">Create Sale</h1>
-	<h1 ng-if="sale.type == 'edit'">Edit Sale</h1>
-</div>
-
-<form class="form-horizontal" ng-submit="sale.saveSale()">
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">PO Number</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.poNumber">
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<h3>Customer: {{ sale.saleData.customer}}</h3>
+				<h3>Project Value: ${{ sale.saleData.value }}</h3>
+				<h3>PO Number: {{ sale.saleData.poNumber }}</h3>
+				<h4>Salesman: {{ sale.saleData.salesman }}</h4>
+				<h4>Project Manager: {{ sale.saleData.projectManager }}</h4>
+			</div>
+			<div class="col-lg-6">
+				Quote Number: {{ sale.saleData.quoteNumber }}<br>
+				Description: {{ sale.saleData.description }}<br>
+				Handover Meeting Date: {{ sale.saleData.meetingDate | date:"dd-MM-yyyy"  }}<br>
+				Handover Meeting Complete: {{ sale.saleData.handoverComplete }}<br>
+				Accounts Process Complete: {{ sale.saleData.accountsEntered }}
+			</div>
 		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Customer</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.customer">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="btn-group">
+					<a ng-href="/sales/{{ sale.saleData._id }}/edit" class="btn btn-success">Edit</a>
+					<a href="#" ng-click="sale.deleteSale(saleItem._id)" class="btn btn-danger">Delete</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="btn-group">
+					<a ng-if="!sale.saleData.handoverComplete" href="#" ng-click="sale.completeHandover(saleItem._id)" class="btn btn-success">Complete Handover</a>
+					<a ng-if="!sale.saleData.accountsEntered" href="#" ng-click="sale.completeAccounts(saleItem._id)" class="btn btn-success">Complete Accounts Process</a>
+				</div>
+			</div>
 		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Value ($)</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.value">
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Salesman</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.salesman">
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Quote Number</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.quoteNumber">
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Meeting Date</label>
-		<div class="col-sm-6">
-			<input type="date" class="form-control" ng-model="sale.saleData.meetingDate">
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Project Manager</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.projectManager">
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Description</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" ng-model="sale.saleData.description">
-		</div>
-	</div>
-
-
-	<div class="form-group">
-	<div class="col-sm-offset-2 col-sm-6">
-		<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'create'">Create Sale</button>
-		<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'edit'">Update Sale</button>
-	</div>
-	</div>
-
-</form>
-
-<div class="row show-hide-message" ng-show="sale.message">
-	<div class="col-sm-6 col-sm-offset-2">
-
-		<div class="alert alert-info">
-			{{ sale.message }}
-		</div>
-
 	</div>
 </div>

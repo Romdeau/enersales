@@ -13,8 +13,15 @@
 	<span class="glyphicon glyphicon-repeat spinner"></span>
 	<p>Loading Sales...</p>
 </div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		Search <input type="text" ng-model="search.$">
+	</div>
+</div>
 
-<table class="table table-bordered table-striped" ng-show="sale.sales">
+
+
+<table class="table table-bordered table-striped" ng-show="sale.sales | filter:search">
 	<thead>
 		<tr>
 			<th>PO Number</th>
@@ -36,11 +43,11 @@
       <td>{{ saleItem.salesman }}</td>
       <td>{{ saleItem.description }}</td>
       <td>{{ saleItem.quoteNumber }}</td>
-      <td>{{ saleItem.meetingDate }}</td>
+      <td>{{ saleItem.meetingDate  | date:"dd-MM-yyyy" }}</td>
       <td>{{ saleItem.projectManager }}</td>
 			<td class="col-sm-2">
-				<a ng-href="/sales/{{ sale._id }}" class="btn btn-danger">Edit</a>
-				<a href="#" ng-click="sale.deleteSale(sale._id)" class="btn btn-primary">Delete</a>
+				<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>
+				<a href="#" ng-click="sale.deleteSale(saleItem._id)" class="btn btn-danger">Delete</a>
 			</td>
 		</tr>
 	</tbody>

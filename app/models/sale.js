@@ -10,7 +10,9 @@ var SaleSchema   = new Schema({
 	description: { type: String, required: true},
 	quoteNumber: String,
 	meetingDate: {type: Date, required: true },
-	projectManager: {type: String, required: true }
+	projectManager: {type: String, required: true },
+	handoverComplete: {type: Boolean, default: false},
+	accountsEntered: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Sale', SaleSchema);

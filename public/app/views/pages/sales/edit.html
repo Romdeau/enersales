@@ -1,0 +1,82 @@
+<div class="page-header">
+	<h1 ng-if="sale.type == 'create'">Create Sale</h1>
+	<h1 ng-if="sale.type == 'edit'">Edit Sale</h1>
+	<h3>Selected User: {{ sale.saleDate.salesman }}</h3>
+</div>
+
+<form name="saleForm" class="form-horizontal" ng-model="form.sale" ng-submit="sale.saveSale()">
+	<fieldset>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">PO Number</label>
+			<div class="col-sm-6">
+				<input name ="poNumber" type="text" class="form-control" ng-model="sale.saleData.poNumber">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Customer</label>
+			<div class="col-sm-6">
+				<input name ="customer" type="text" class="form-control" ng-model="sale.saleData.customer">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Value ($)</label>
+			<div class="col-sm-6">
+				<input name ="value" type="text" class="form-control" ng-model="sale.saleData.value">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="select" class="col-sm-2 control-label">Salesman</label>
+			<div class="col-sm-6">
+				<select class="form-control" ng-model="sale.saleDate.salesman" ng-options="user._id as user.name for user in sale.users"></select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Quote Number</label>
+			<div class="col-sm-6">
+				<input name ="quoteNumber" type="text" class="form-control" ng-model="sale.saleData.quoteNumber">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Handover Meeting Date</label>
+			<div class="col-sm-6">
+				<input name ="meetingDate" type="date" class="form-control" ng-model="sale.saleData.meetingDate">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Project Manager</label>
+			<div class="col-sm-6">
+				<input name ="projectManager" type="text" class="form-control" ng-model="sale.saleData.projectManager">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-6">
+				<input name ="description" type="text" class="form-control" ng-model="sale.saleData.description">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-6">
+				<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'create'">Create Sale</button>
+				<button type="submit" class="btn btn-success btn-lg btn-block" ng-if="sale.type == 'edit'">Update Sale</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
+
+<div class="row show-hide-message" ng-show="sale.message">
+	<div class="col-sm-6 col-sm-offset-2">
+
+		<div class="alert alert-info">
+			{{ sale.message }}
+		</div>
+
+	</div>
+</div>

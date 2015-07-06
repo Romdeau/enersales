@@ -3,9 +3,16 @@ var User       = require('../models/user');
 var Sale			 = require('../models/sale');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 // super secret for creating tokens
 var superSecret = config.secret;
+
+var transporter = nodemailer.createTransport(smtpTransport({
+	host: config.emailServer,
+	port: config.emailPort
+}));
 
 module.exports = function(app, express) {
 
@@ -231,12 +238,79 @@ module.exports = function(app, express) {
 			Sale.find({}, function(err, sales) {
 				if (err) res.send(err);
 
-				// return the users
+				// return the saless
 				res.json(sales);
 			});
 		})
 
 	//on routes that end in /sales/:sale_id
+
+	apiRouter.route('/sales/:sale_id')
+
+		// get the sale with that id
+		.get(function(req, res) {
+			Sale.findById(req.params.sale_id, function(err, sale) {
+				if (err) res.send(err);
+				// return that sale
+				res.json(sale);
+			});
+		})
+
+		// update the sale with this id
+		.put(function(req, res) {
+			Sale.findById(req.params.sale_id, function(err, sale) {
+
+				if (err) res.send(err);
+
+				// set the new sale information if it exists in the request
+				if (req.body.poNumber) sale.poNumber = req.body.poNumber;
+				if (req.body.customer) sale.customer = req.body.customer;
+				if (req.body.value) sale.value = req.body.value;
+				if (req.body.salesman) sale.salesman = req.body.salesman;
+				if (req.body.quoteNumber) sale.quoteNumber = req.body.quoteNumber;
+				if (req.body.meetingDate) sale.meetingDate = req.body.meetingDate;
+				if (req.body.projectManager) sale.projectManager = req.body.projectManager;
+				if (req.body.description) sale.description = req.body.description;
+				if (req.body.handoverComplete) sale.handoverComplete = req.body.handoverComplete;
+				if (req.body.accountsEntered) sale.accountsEntered = req.body.accountsEntered;
+
+				// save the sale
+				sale.save(function(err) {
+					if (err) res.send(err);
+
+					// return a message
+					res.json({ message: 'Sale updated!' });
+				});
+
+			});
+		})
+
+		// delete the sale with this id
+		.delete(function(req, res) {
+			Sale.remove({
+				_id: req.params.sale_id
+			}, function(err, sale) {
+				if (err) res.send(err);
+
+				res.json({ message: 'Successfully deleted' });
+			});
+		});
+
+	//routes that end in /email================================================
+	apiRouter.route('/email')
+		//post route for sending email
+		.post(function(req, res){
+			var data = req.body;
+
+			transporter.sendMail({
+				from: data.fromEmail,
+				to: data.toEmail,
+				subject: data.subject,
+				text: data.messageText
+			});
+
+			res.json({ message: 'Successfully emailed' });
+		});
 
 	return apiRouter;
 };

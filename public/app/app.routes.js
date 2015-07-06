@@ -48,17 +48,24 @@ angular.module('app.routes', ['ngRoute'])
 		//form to create a new sale
 		//same view as edit page
 		.when('/sales/create', {
-			templateUrl: 'app/views/pages/sales/single.html',
+			templateUrl: 'app/views/pages/sales/edit.html',
 			controller: 'saleCreateController',
 			controllerAs: 'sale'
 		})
 
-		// page to edit a sale
-		.when('/sales/:sale_id', {
+		// show the page for a sale
+		.when('/sales/:sale_id/', {
 			templateUrl: 'app/views/pages/sales/single.html',
+			controller: 'saleViewController',
+			controllerAs: 'sale'
+		})
+
+		// page to edit a sale
+		.when('/sales/:sale_id/edit', {
+			templateUrl: 'app/views/pages/sales/edit.html',
 			controller: 'saleEditController',
 			controllerAs: 'sale'
-		});
+		})
 
 	$locationProvider.html5Mode(true);
 

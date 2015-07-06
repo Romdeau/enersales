@@ -1,6 +1,6 @@
-angular.module('saleCtrl', ['saleService'])
+angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 
-.controller('saleController', function(Sale) {
+.controller('saleController', function(Sale, $location) {
 
 	var vm = this;
 
@@ -35,18 +35,34 @@ angular.module('saleCtrl', ['saleService'])
 					});
 
 			});
+
 	};
 
 })
 
 // controller applied to sale creation page
-.controller('saleCreateController', function(Sale) {
+.controller('saleCreateController', function(Sale, User, $location) {
 
 	var vm = this;
+
+	var mailData = ({
+		fromEmail: "noreply@eneraque.com",
+		toEmail: "thomas.taege@eneraque.com",
+		subject: 'A new sale has been created',
+		messageText: 'Project Details go Here'
+	});
 
 	// variable to hide/show elements of the view
 	// differentiates between create or edit pages
 	vm.type = 'create';
+
+	// grab all the users at page load
+	User.all()
+		.success(function(userData) {
+			// bind the users that come back to vm.users
+			vm.users = userData;
+			vm.salesmanID = userData[0].id;
+		});
 
 	// function to create a sale
 	vm.saveSale = function() {
@@ -57,18 +73,70 @@ angular.module('saleCtrl', ['saleService'])
 		Sale.create(vm.saleData)
 			.success(function(data) {
 				vm.processing = false;
+				//send email on success
+				//Sale.emailNotification(mailData)
 
-				//clear the form
-				vm.saleData = {};
+				//route to sales location
+				$location.path('/sales/');
+			}).error(function(err) {
 				vm.message = data.message;
 			});
-
 	};
 
 })
 
+//controlled applies to view a single sale
+.controller('saleViewController', function($routeParams, Sale, $location) {
+	var vm = this;
+
+	var handoverTrue = ({
+		handoverComplete: true
+	});
+
+	var accountsTrue = ({
+		accountsEntered: true
+	});
+
+	// get the sale data for the sale you want to view
+	// $routeParams is the way we grab data from the URL
+	Sale.get($routeParams.sale_id)
+		.success(function(data) {
+			vm.saleData = data;
+		});
+
+	//function to complete the handover
+	vm.completeHandover = function() {
+		vm.processing = true;
+		// call the saleService function to update
+		Sale.update($routeParams.sale_id, handoverTrue)
+			.success(function(data) {
+				vm.processing = false;
+				//update sale on success so status updates
+				Sale.get($routeParams.sale_id)
+					.success(function(data) {
+						vm.saleData = data;
+					});
+			});
+	}
+
+	//function to complete the accountsProcess
+	vm.completeAccounts = function() {
+		vm.processing = true;
+		// call the saleService function to update
+		Sale.update($routeParams.sale_id, accountsTrue)
+			.success(function(data) {
+				vm.processing = false;
+				//update sale on success so status updates
+				Sale.get($routeParams.sale_id)
+					.success(function(data) {
+						vm.saleData = data;
+					});
+			});
+	};
+})
+
 // controller applied to sale edit page
-.controller('saleEditController', function($routeParams, Sale) {
+.controller('saleEditController', function($routeParams, Sale, User, $location, $scope) {
 
 	var vm = this;
 
@@ -76,11 +144,24 @@ angular.module('saleCtrl', ['saleService'])
 	// differentiates between create or edit pages
 	vm.type = 'edit';
 
+	// grab all the users at page load
+	User.all()
+		.success(function(data) {
+
+			// when all the users come back, remove the processing variable
+			vm.processing = false;
+
+			// bind the users that come back to vm.users
+			vm.users = data;
+		});
+
 	// get the sale data for the sale you want to edit
 	// $routeParams is the way we grab data from the URL
 	Sale.get($routeParams.sale_id)
 		.success(function(data) {
+			data.meetingDate = new Date(data.meetingDate);
 			vm.saleData = data;
+			//$scope.formattedDate = new Date(data.meetingDate);
 		});
 
 	// function to save the sale
@@ -95,10 +176,8 @@ angular.module('saleCtrl', ['saleService'])
 
 				// clear the form
 				vm.saleData = {};
-
-				// bind the message from our API to vm.message
 				vm.message = data.message;
+				$location.path('/sales');
 			});
 	};
-
-});
+})
