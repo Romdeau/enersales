@@ -1,5 +1,8 @@
 module.exports = {
 	'port': process.env.PORT || 8080, //gets port from environment variable, otherwise runs on 8080
 	'database': 'mongodb://localhost:27017/enersales', //mongo connection string
-	'secret': 'thisisafairlypooryetfairlylongapplicationsecret' //application secret
+	'secret': 'thisisafairlypooryetfairlylongapplicationsecret', //application secret
+	'emailServer': 'your.mail.domain', // your mail domain
+	'emailPort': 25, // your mail port
+	//NB: if your mail server need authentication (and it probably does) you'll need to edit the transporter variable in /app/api
 };

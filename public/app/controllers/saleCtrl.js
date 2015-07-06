@@ -255,7 +255,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 	vm.saveSale = function() {
 		vm.processing = true;
 		vm.message = '';
-
+		vm.saleData.handoverComplete = true;
 		// call the saleService function to update
 		Sale.update($routeParams.sale_id, vm.saleData)
 			.success(function(data) {
