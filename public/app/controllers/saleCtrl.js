@@ -72,12 +72,15 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 		// use the create function in the saleService
 		Sale.create(vm.saleData)
 			.success(function(data) {
+				//console.log(data);
 				vm.processing = false;
 				//send email on success
+				//mailData.messageText = "Successfully added job " + vm.saleData.poNumber;
 				//Sale.emailNotification(mailData)
 
 				//route to sales location
-				$location.path('/sales/');
+				//$location.path('/sales/');
+				vm.message = data.message;
 			}).error(function(err) {
 				vm.message = data.message;
 			});
@@ -86,7 +89,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 })
 
 //controlled applies to view a single sale
-.controller('saleViewController', function($routeParams, Sale, $location) {
+.controller('saleViewController', function($routeParams, Sale, User, $location) {
 	var vm = this;
 
 	var handoverTrue = ({
@@ -102,6 +105,14 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 	Sale.get($routeParams.sale_id)
 		.success(function(data) {
 			vm.saleData = data;
+		});
+
+	// grab all the users at page load so we can display names
+	User.all()
+		.success(function(userData) {
+			// bind the users that come back to vm.users
+			vm.users = userData;
+			vm.salesmanID = userData[0].id;
 		});
 
 	//function to complete the handover
@@ -147,9 +158,85 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 	// grab all the users at page load
 	User.all()
 		.success(function(data) {
+			// bind the users that come back to vm.users
+			vm.users = data;
+		});
 
-			// when all the users come back, remove the processing variable
-			vm.processing = false;
+	// get the sale data for the sale you want to edit
+	// $routeParams is the way we grab data from the URL
+	Sale.get($routeParams.sale_id)
+		.success(function(data) {
+			data.meetingDate = new Date(data.meetingDate);
+			vm.saleData = data;
+			//$scope.formattedDate = new Date(data.meetingDate);
+		});
+
+	// function to save the sale
+	vm.saveSale = function() {
+		vm.processing = true;
+		vm.message = '';
+
+		// call the saleService function to update
+		Sale.update($routeParams.sale_id, vm.saleData)
+			.success(function(data) {
+				vm.processing = false;
+
+				// clear the form
+				vm.saleData = {};
+				vm.message = data.message;
+				$location.path('/sales');
+			});
+	};
+})
+
+// controller applied to sale handover page
+.controller('saleHandoverController', function($routeParams, Sale, User, $location, $scope) {
+
+	var vm = this;
+
+	// grab all the users at page load
+	User.all()
+		.success(function(data) {
+
+			// bind the users that come back to vm.users
+			vm.users = data;
+		});
+
+	// get the sale data for the sale you want to edit
+	// $routeParams is the way we grab data from the URL
+	Sale.get($routeParams.sale_id)
+		.success(function(data) {
+			data.meetingDate = new Date(data.meetingDate);
+			vm.saleData = data;
+			//$scope.formattedDate = new Date(data.meetingDate);
+		});
+
+	// function to save the sale
+	vm.saveSale = function() {
+		vm.processing = true;
+		vm.message = '';
+
+		// call the saleService function to update
+		Sale.update($routeParams.sale_id, vm.saleData)
+			.success(function(data) {
+				vm.processing = false;
+
+				// clear the form
+				vm.saleData = {};
+				vm.message = data.message;
+				$location.path('/sales');
+			});
+	};
+})
+
+// controller applied to sale accounts page
+.controller('saleHandoverController', function($routeParams, Sale, User, $location, $scope) {
+
+	var vm = this;
+
+	// grab all the users at page load
+	User.all()
+		.success(function(data) {
 
 			// bind the users that come back to vm.users
 			vm.users = data;

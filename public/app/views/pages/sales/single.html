@@ -1,17 +1,26 @@
 <div class="panel panel-default">
-	<div class="panel-body">
+	<div class="panel-heading">
 		<div class="row">
 			<div class="col-lg-6">
 				<h3>Customer: {{ sale.saleData.customer}}</h3>
-				<h3>Project Value: ${{ sale.saleData.value }}</h3>
-				<h3>PO Number: {{ sale.saleData.poNumber }}</h3>
-				<h4>Salesman: {{ sale.saleData.salesman }}</h4>
-				<h4>Project Manager: {{ sale.saleData.projectManager }}</h4>
 			</div>
 			<div class="col-lg-6">
+				<h3>Project Value: ${{ sale.saleData.value }}</h3>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<h4>PO Number: {{ sale.saleData.poNumber }}</h4>
+				<h4>Salesman: {{ sale.saleData.salesman.name }}</h4>
+				<h4>Project Manager: {{ sale.saleData.projectManager.name }}</h4>
+				<h4>Accounts Signoff: {{ sale.saleData.accountsManager.name }}</h4>
+			</div>
+			<div class="col-lg-6">
+				<h4>Handover Meeting Date: {{ sale.saleData.meetingDate | date:"dd-MM-yyyy"  }}</h4>
 				Quote Number: {{ sale.saleData.quoteNumber }}<br>
 				Description: {{ sale.saleData.description }}<br>
-				Handover Meeting Date: {{ sale.saleData.meetingDate | date:"dd-MM-yyyy"  }}<br>
 				Handover Meeting Complete: {{ sale.saleData.handoverComplete }}<br>
 				Accounts Process Complete: {{ sale.saleData.accountsEntered }}
 			</div>
@@ -20,13 +29,12 @@
 			<div class="col-lg-6">
 				<div class="btn-group">
 					<a ng-href="/sales/{{ sale.saleData._id }}/edit" class="btn btn-success">Edit</a>
-					<a href="#" ng-click="sale.deleteSale(saleItem._id)" class="btn btn-danger">Delete</a>
 				</div>
 			</div>
 			<div class="col-lg-6">
 				<div class="btn-group">
-					<a ng-if="!sale.saleData.handoverComplete" href="#" ng-click="sale.completeHandover(saleItem._id)" class="btn btn-success">Complete Handover</a>
-					<a ng-if="!sale.saleData.accountsEntered" href="#" ng-click="sale.completeAccounts(saleItem._id)" class="btn btn-success">Complete Accounts Process</a>
+					<a ng-if="!sale.saleData.handoverComplete" href="/sales/{{ sale.saleData._id }}/handover" class="btn btn-success">Create Handover</a>
+					<a ng-if="!sale.saleData.accountsEntered" href="#" class="btn btn-success">Complete Accounts Process</a>
 				</div>
 			</div>
 		</div>

@@ -67,6 +67,13 @@ angular.module('app.routes', ['ngRoute'])
 			controllerAs: 'sale'
 		})
 
+		// page to create a handover
+		.when('/sales/:sale_id/handover', {
+			templateUrl: 'app/views/pages/sales/handover.html',
+			controller: 'saleHandoverController',
+			controllerAs: 'sale'
+		})
+
 	$locationProvider.html5Mode(true);
 
 });
