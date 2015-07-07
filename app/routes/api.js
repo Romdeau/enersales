@@ -121,6 +121,7 @@ module.exports = function(app, express) {
 
 			var user = new User();		// create a new instance of the User model
 			user.name = req.body.name;  // set the users name (comes from the request)
+			user.email = req.body.email;  // set the users name (comes from the request)
 			user.username = req.body.username;  // set the users username (comes from the request)
 			user.password = req.body.password;  // set the users password (comes from the request)
 
@@ -128,13 +129,13 @@ module.exports = function(app, express) {
 				if (err) {
 					// duplicate entry
 					if (err.code == 11000)
-						return res.json({ success: false, message: 'A user with that username already exists. '});
+						return res.json({ success: false, message: 'A user with that username / email already exists. '});
 					else
-						return res.send(err);
+						return res.send({ success: false, message: err });
 				}
 
 				// return a message
-				res.json({ message: 'User created!' });
+				res.json({ success: true, message: 'User created!' });
 			});
 
 		})
@@ -172,6 +173,7 @@ module.exports = function(app, express) {
 
 				// set the new user information if it exists in the request
 				if (req.body.name) user.name = req.body.name;
+				if (req.body.email) user.email = req.body.email;
 				if (req.body.username) user.username = req.body.username;
 				if (req.body.password) user.password = req.body.password;
 
@@ -271,6 +273,7 @@ module.exports = function(app, express) {
 				if (req.body.meetingDate) sale.meetingDate = req.body.meetingDate;
 				if (req.body.projectManager) sale.projectManager = req.body.projectManager;
 				if (req.body.description) sale.description = req.body.description;
+				if (req.body.accountsManager) sale.accountsManager = req.body.accountsManager
 				if (req.body.handoverComplete) sale.handoverComplete = req.body.handoverComplete;
 				if (req.body.accountsEntered) sale.accountsEntered = req.body.accountsEntered;
 
@@ -306,7 +309,9 @@ module.exports = function(app, express) {
 				from: data.fromEmail,
 				to: data.toEmail,
 				subject: data.subject,
-				text: data.messageText
+				text: data.text,
+				html: data.html,
+				cc: data.cc
 			});
 
 			res.json({ message: 'Successfully emailed' });

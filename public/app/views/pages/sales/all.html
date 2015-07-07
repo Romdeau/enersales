@@ -43,7 +43,7 @@
       <td>{{ saleItem.salesman.name }}</td>
       <td>{{ saleItem.description }}</td>
       <td>{{ saleItem.quoteNumber }}</td>
-      <td>{{ saleItem.meetingDate  | date:"dd-MM-yyyy" }}</td>
+      <td>{{ saleItem.meetingDate  | date:"dd-MM-yyyy h:mm a" }}</td>
       <td>{{ saleItem.projectManager.name }}</td>
 			<td class="col-sm-2">
 				<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>

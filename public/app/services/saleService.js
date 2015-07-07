@@ -31,11 +31,6 @@ angular.module('saleService', [])
 		return $http.delete('/api/sales/' + id);
 	};
 
-	// send an email
-	saleFactory.emailNotification = function(mailData) {
-		return $http.post('/api/email/', mailData);
-	};
-
 	// return our entire saleFactory object
 	return saleFactory;
 

@@ -1,6 +1,5 @@
 <div class="page-header">
 	<h1>Create Handover</h1>
-	<p>{{ sale.saleData }}</p>
 </div>
 
 <form name="saleForm" class="form-horizontal" ng-model="form.sale" ng-submit="sale.saveSale()">
@@ -15,7 +14,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Handover Meeting Date</label>
 			<div class="col-sm-6">
-				<input name ="meetingDate" type="date" class="form-control" ng-model="sale.saleData.meetingDate">
+				<input name ="meetingDate" type="datetime-local" class="form-control" ng-model="sale.saleData.meetingDate">
 			</div>
 		</div>
 

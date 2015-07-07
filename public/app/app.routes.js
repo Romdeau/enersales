@@ -74,6 +74,13 @@ angular.module('app.routes', ['ngRoute'])
 			controllerAs: 'sale'
 		})
 
+		// page to complete the accounts process
+		.when('/sales/:sale_id/accounts', {
+			templateUrl: 'app/views/pages/sales/accounts.html',
+			controller: 'saleAccountsController',
+			controllerAs: 'sale'
+		})
+
 	$locationProvider.html5Mode(true);
 
 });

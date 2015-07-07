@@ -1,4 +1,4 @@
-angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
+angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailService'])
 
 .controller('saleController', function(Sale, $location) {
 
@@ -41,16 +41,9 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 })
 
 // controller applied to sale creation page
-.controller('saleCreateController', function(Sale, User, $location) {
+.controller('saleCreateController', function(Sale, User, Mail, $location) {
 
 	var vm = this;
-
-	var mailData = ({
-		fromEmail: "noreply@eneraque.com",
-		toEmail: "thomas.taege@eneraque.com",
-		subject: 'A new sale has been created',
-		messageText: 'Project Details go Here'
-	});
 
 	// variable to hide/show elements of the view
 	// differentiates between create or edit pages
@@ -75,12 +68,10 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 				//console.log(data);
 				vm.processing = false;
 				//send email on success
-				//mailData.messageText = "Successfully added job " + vm.saleData.poNumber;
-				//Sale.emailNotification(mailData)
+				Mail.createSale(vm.saleData)
 
 				//route to sales location
-				//$location.path('/sales/');
-				vm.message = data.message;
+				$location.path('/sales/');
 			}).error(function(err) {
 				vm.message = data.message;
 			});
@@ -190,47 +181,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 })
 
 // controller applied to sale handover page
-.controller('saleHandoverController', function($routeParams, Sale, User, $location, $scope) {
-
-	var vm = this;
-
-	// grab all the users at page load
-	User.all()
-		.success(function(data) {
-
-			// bind the users that come back to vm.users
-			vm.users = data;
-		});
-
-	// get the sale data for the sale you want to edit
-	// $routeParams is the way we grab data from the URL
-	Sale.get($routeParams.sale_id)
-		.success(function(data) {
-			data.meetingDate = new Date(data.meetingDate);
-			vm.saleData = data;
-			//$scope.formattedDate = new Date(data.meetingDate);
-		});
-
-	// function to save the sale
-	vm.saveSale = function() {
-		vm.processing = true;
-		vm.message = '';
-
-		// call the saleService function to update
-		Sale.update($routeParams.sale_id, vm.saleData)
-			.success(function(data) {
-				vm.processing = false;
-
-				// clear the form
-				vm.saleData = {};
-				vm.message = data.message;
-				$location.path('/sales');
-			});
-	};
-})
-
-// controller applied to sale accounts page
-.controller('saleHandoverController', function($routeParams, Sale, User, $location, $scope) {
+.controller('saleHandoverController', function($routeParams, Sale, User, Mail, $location, $scope) {
 
 	var vm = this;
 
@@ -260,10 +211,48 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService'])
 		Sale.update($routeParams.sale_id, vm.saleData)
 			.success(function(data) {
 				vm.processing = false;
+				//send email
+				Mail.createHandover(vm.saleData)
+				//route back to sales
+				$location.path('/sales');
+			});
+	};
+})
 
-				// clear the form
-				vm.saleData = {};
-				vm.message = data.message;
+// controller applied to sale accounts page
+.controller('saleAccountsController', function($routeParams, Sale, User, Mail, $location, $scope) {
+
+	var vm = this;
+
+	// grab all the users at page load
+	User.all()
+		.success(function(data) {
+
+			// bind the users that come back to vm.users
+			vm.users = data;
+		});
+
+	// get the sale data for the sale you want to edit
+	// $routeParams is the way we grab data from the URL
+	Sale.get($routeParams.sale_id)
+		.success(function(data) {
+			data.meetingDate = new Date(data.meetingDate);
+			vm.saleData = data;
+			//$scope.formattedDate = new Date(data.meetingDate);
+		});
+
+	// function to save the sale
+	vm.saveSale = function() {
+		vm.processing = true;
+		vm.message = '';
+		vm.saleData.accountsEntered = true;
+		// call the saleService function to update
+		Sale.update($routeParams.sale_id, vm.saleData)
+			.success(function(data) {
+				vm.processing = false;
+				//send email
+				Mail.finaliseAccounts(vm.saleData)
+				//route back to sales
 				$location.path('/sales');
 			});
 	};
