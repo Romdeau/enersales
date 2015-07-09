@@ -20,6 +20,7 @@
     "angular-moment": "~0.10.1",
     "moment": "~2.10.3",
     "underscore": "~1.8.3",
-    "angular-recursion": "~1.0.5"
+    "angular-recursion": "~1.0.5",
+    "bootswatch-dist": "paper"
   }
 }
