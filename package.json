@@ -1,6 +1,7 @@
 {
   "name": "enersales",
   "main": "server.js",
+  "version": "0.1.0",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.9.3",
