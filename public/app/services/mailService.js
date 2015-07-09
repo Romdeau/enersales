@@ -16,8 +16,8 @@ angular.module('mailService', [])
 
     //inject content from mailData
     mailArray.toEmail = mailData.salesman.email;
-    mailArray.text = "TEXT\nSuccessfully added job " + mailData.poNumber + " for customer " + mailData.customer + ".\nYou have been assigned as the saleman for this job. \nPlease complete the handover process for this job when you are able to @ http://enersales.eneraque.com/sales/" + mailData._id;
-    mailArray.html = "HTML<br />Successfully added job " + mailData.poNumber + " for customer " + mailData.customer + ".<br />You have been assigned as the saleman for this job. <br /><br />Please complete the handover process for this job when you are able to @ http://enersales.eneraque.com/sales/" + mailData._id;
+    mailArray.text = "Successfully added job " + mailData.poNumber + " for customer " + mailData.customer + ".\nYou have been assigned as the saleman for this job. \nPlease complete the handover process for this job when you are able to @ http://enersales.eneraque.com/sales/" + mailData._id;
+    mailArray.html = "Successfully added job " + mailData.poNumber + " for customer " + mailData.customer + ".<br />You have been assigned as the saleman for this job. <br /><br />Please complete the handover process for this job when you are able to @ http://enersales.eneraque.com/sales/" + mailData._id;
 
     //send the email
     return $http.post('/api/email/', mailArray);
