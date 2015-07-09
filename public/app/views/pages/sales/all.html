@@ -41,7 +41,7 @@
       <td>{{ saleItem.customer }}</td>
       <td>{{ saleItem.value | currency }}</td>
       <td>{{ saleItem.salesman.name }}</td>
-      <td>{{ saleItem.description }}</td>
+      <td>{{ saleItem.description | limitTo:10 }}</td>
       <td>{{ saleItem.quoteNumber }}</td>
       <td>{{ saleItem.meetingDate  | date:"dd-MM-yyyy h:mm a" }}</td>
       <td>{{ saleItem.projectManager.name }}</td>
