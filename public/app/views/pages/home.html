@@ -2,12 +2,12 @@
 	<h1>Welcome to EnerSales!</h1>
 
 	<div ng-if="!main.loggedIn">
-		<p>Login to see manage your users.</p>
+		<p>Login to see your sales.</p>
 		<a href="/login" class="btn btn-primary">Login</a>
 	</div>
 
 	<div ng-if="main.loggedIn">
 		<p>Manage your sales.</p>
-		<a href="/users" class="btn btn-primary">View Sales</a>
+		<a href="/sales" class="btn btn-primary">View Sales</a>
 	</div>
 </div>
