@@ -46,4 +46,31 @@ angular.module('mainCtrl', [])
 		$location.path('/login');
 	};
 
+})
+// controller applied to user creation page
+.controller('mainCreateController', function(User) {
+
+	var vm = this;
+
+	// variable to hide/show elements of the view
+	// differentiates between create or edit pages
+	vm.type = 'create';
+
+	// function to create a user
+	vm.saveUser = function() {
+		vm.processing = true;
+		vm.message = '';
+
+		// use the create function in the userService
+		User.mainCreate(vm.userData)
+			.success(function(data) {
+				vm.processing = false;
+
+				//clear the form
+				vm.userData = {};
+				vm.message = data.message;
+			});
+
+	};
+
 });

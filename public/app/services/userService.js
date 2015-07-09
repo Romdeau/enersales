@@ -30,6 +30,11 @@ angular.module('userService', [])
 		return $http.delete('/api/users/' + id);
 	};
 
+	// create a user
+	userFactory.mainCreate = function(userData) {
+		return $http.post('/api/create/', userData);
+	};
+
 	// return our entire userFactory object
 	return userFactory;
 

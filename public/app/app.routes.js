@@ -9,6 +9,13 @@ angular.module('app.routes', ['ngRoute'])
 			templateUrl : 'app/views/pages/home.html'
 		})
 
+		// create user page (unauthenticated)
+		.when('/create', {
+			templateUrl : 'app/views/pages/create.html',
+   			controller  : 'mainCreateController',
+    			controllerAs: 'user'
+		})
+
 		// login page
 		.when('/login', {
 			templateUrl : 'app/views/pages/login.html',

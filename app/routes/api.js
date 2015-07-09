@@ -67,6 +67,27 @@ module.exports = function(app, express) {
 	  });
 	});
 
+	apiRouter.post('/create', function(req, res) {
+		var user = new User();		// create a new instance of the User model
+		user.name = req.body.name;  // set the users name (comes from the request)
+		user.email = req.body.email;  // set the users name (comes from the request)
+		user.username = req.body.username;  // set the users username (comes from the request)
+		user.password = req.body.password;  // set the users password (comes from the request)
+
+		user.save(function(err) {
+			if (err) {
+				// duplicate entry
+				if (err.code == 11000)
+					return res.json({ success: false, message: 'A user with that username / email already exists. '});
+				else
+					return res.send({ success: false, message: err });
+			}
+
+			// return a message
+			res.json({ success: true, message: 'User created!' });
+		});
+	})
+
 	// route middleware to verify a token
 	apiRouter.use(function(req, res, next) {
 		// do logging
