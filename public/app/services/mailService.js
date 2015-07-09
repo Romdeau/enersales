@@ -1,6 +1,6 @@
 angular.module('mailService', [])
 
-.factory('Mail', function($http) {
+.factory('Mail', function($http, $filter) {
   // create a new object
 	var mailFactory = {};
 
@@ -33,10 +33,12 @@ angular.module('mailService', [])
   		html: 'Template HTML'
   	});
 
+		var meetingTime = $filter('date')(mailData.meetingDate, "dd-MM-yyyy h:mm a");
+
     //inject content from mailData
     //mailArray.toEmail = mailData.salesman.email + ", " + mailData.projectManager;
-    mailArray.text = "Hello, a handover meeting for PO " + mailData.poNumber + " for " + mailData.customer + "has been proposed for:\n\n" + $filter('date')(mailData.meetingDate, "dd-MM-yyyy h:mm a") + "\n\nIf this does not suit please reply to each other, this email address does not exist";
-    mailArray.html = "Hello, a handover meeting for PO " + mailData.poNumber + " for " + mailData.customer + "has been proposed for:<br/><br/>" + $filter('date')(mailData.meetingDate, "dd-MM-yyyy h:mm a") + "<br/><br/>If this does not suit please reply to each other, this email address does not exist";
+    mailArray.text = "Hello, a handover meeting for PO " + mailData.poNumber + " for " + mailData.customer + " has been proposed for:\n\n" + meetingTime + "\n\nIf this does not suit please reply to each other, this email address does not exist";
+    mailArray.html = "Hello, a handover meeting for PO " + mailData.poNumber + " for " + mailData.customer + " has been proposed for:<br/><br/>" + meetingTime + "<br/><br/>If this does not suit please reply to each other, this email address does not exist";
 
     //send the email
     return $http.post('/api/email/', mailArray);

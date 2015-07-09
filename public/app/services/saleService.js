@@ -17,7 +17,6 @@ angular.module('saleService', [])
 
 	// create a sale
 	saleFactory.create = function(saleData) {
-		console.log(saleData);
 		return $http.post('/api/sales/', saleData);
 	};
 
