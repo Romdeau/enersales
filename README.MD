@@ -1,4 +1,4 @@
-#Enersales
+#Enersales v0.1.0
 ##Node API with Express, frontend with Angular 1.3.15
 ###Probably terrible learning project, I'm still figuring this angualar thing out.
 
