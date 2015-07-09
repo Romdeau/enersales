@@ -1,7 +1,4 @@
-// BASE SETUP
-// ======================================
-
-// CALL THE PACKAGES --------------------
+// Set variables for node app =================================================
 var express    = require('express');		// call express
 var app        = express(); 				// define our app using express
 var bodyParser = require('body-parser'); 	// get body-parser
@@ -10,8 +7,6 @@ var mongoose   = require('mongoose');
 var config 	   = require('./config');
 var path 	   = require('path');
 
-// APP CONFIGURATION ==================
-// ====================================
 // use body parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -34,8 +29,7 @@ mongoose.connect(config.database);
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
 
-// ROUTES FOR OUR API =================
-// ====================================
+// Setup API Routes ===========================================================
 
 // API ROUTES ------------------------
 var apiRoutes = require('./app/routes/api')(app, express);
@@ -48,7 +42,6 @@ app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
-// START THE SERVER
-// ====================================
+// START THE SERVER ===========================================================
 app.listen(config.port);
 console.log('Magic happens on port ' + config.port);
