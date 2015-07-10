@@ -1,4 +1,4 @@
-angular.module('userCtrl', ['userService'])
+angular.module('userCtrl', ['userService', 'mailService'])
 
 .controller('userController', function(User) {
 
@@ -40,7 +40,7 @@ angular.module('userCtrl', ['userService'])
 })
 
 // controller applied to user creation page
-.controller('userCreateController', function(User) {
+.controller('userCreateController', function(User, Mail) {
 
 	var vm = this;
 
@@ -57,7 +57,7 @@ angular.module('userCtrl', ['userService'])
 		User.create(vm.userData)
 			.success(function(data) {
 				vm.processing = false;
-
+				Mail.createUser(vm.userData);
 				//clear the form
 				vm.userData = {};
 				vm.message = data.message;
