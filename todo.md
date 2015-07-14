@@ -3,10 +3,12 @@
 ##Users
 Password Reset
 ~~User Roles~~
+Prevent Users Updating users that arent themselves
 
 ##Sales
 ~~Per user views~~
 Restrict Drop Downs to user roles
+Accounts Signoff not appearing
 
 ##Dashboard
 ~~Implement a Dashboard~~
