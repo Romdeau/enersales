@@ -29,9 +29,9 @@ angular.module('mainCtrl', [])
 			.success(function(data) {
 				vm.processing = false;
 
-				// if a user successfully logs in, redirect to the sales page
+				// if a user successfully logs in, redirect them to their personal dashboard
 				if (data.success)
-					$location.path('/sales');
+					$location.path('/current_user');
 				else
 					vm.error = data.message;
 
