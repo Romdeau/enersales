@@ -5,7 +5,7 @@ Password Reset
 User Roles
 
 ##Sales
-Per user views
+~~Per user views~~
 Restrict Drop Downs to user roles
 
 ##Dashboard
