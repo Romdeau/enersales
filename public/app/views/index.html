@@ -10,6 +10,7 @@
 	<!--CSS-->
 	<link rel="stylesheet" href="assets/libs/bootswatch-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/libs/nvd3/nv.d3.min.css">
 
 	<!-- JS / LIBS -->
 	<script src="assets/libs/angular/angular.js"></script>
@@ -20,11 +21,16 @@
 	<script src="assets/libs/moment/moment.js"></script>
 	<script src="assets/libs/moment/locale/en-au.js"></script>
 	<script src="assets/libs/angular-moment/angular-moment.min.js"></script>
+	<script src="assets/libs/d3/d3.min.js"></script>
+	<script src="assets/libs/nvd3/nv.d3.min.js"></script>
+	<script src="assets/libs/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js"></script>
+
 
 	<!-- controllers -->
 	<script src="app/controllers/mainCtrl.js"></script>
 	<script src="app/controllers/userCtrl.js"></script>
 	<script src="app/controllers/saleCtrl.js"></script>
+	<script src="app/controllers/dashboardCtrl.js"></script>
 
 	<!-- services -->
 	<script src="app/services/authService.js"></script>
@@ -46,7 +52,7 @@
 			<a href="/" class="navbar-brand"><span class="glyphicon glyphicon-globe"></span> Enersales</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Dashboard</a></li>
+			<li><a href="/dashboard"><span class="glyphicon glyphicon-calendar"></span> Dashboard</a></li>
 			<li><a href="/sales"><span class="glyphicon glyphicon-briefcase"></span> Sales</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

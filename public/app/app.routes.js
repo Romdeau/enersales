@@ -102,6 +102,13 @@ angular.module('app.routes', ['ngRoute'])
 			controllerAs: 'sale'
 		})
 
+		// page for the dashboard
+		.when('/dashboard', {
+			templateUrl: 'app/views/pages/dashboard/dashboard.html',
+			controller: 'dashboardController',
+			controllerAs: 'dashboard'
+		})
+
 	$locationProvider.html5Mode(true);
 
 });

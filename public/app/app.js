@@ -1,4 +1,4 @@
-angular.module('saleApp', ['ngAnimate', 'app.routes', 'angularMoment', 'authService', 'mainCtrl', 'userCtrl', 'userService', 'saleCtrl', 'saleService', 'mailService'])
+angular.module('saleApp', ['ngAnimate', 'app.routes', 'angularMoment', 'authService', 'mainCtrl', 'userCtrl', 'userService', 'saleCtrl', 'saleService', 'dashboardCtrl', 'mailService', 'nvd3ChartDirectives'])
 
 // application configuration to integrate token into requests
 .config(function($httpProvider) {

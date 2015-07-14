@@ -360,15 +360,51 @@ module.exports = function(app, express) {
 			});
 		});
 
-		//on routes that end in /sales/accounts/:salesman_id
-		apiRouter.route('/sales/accounts/:salesman_id')
-			.get(function(req,res){
-				Sale.find({ "accountsManager._id": req.params.salesman_id }, function(err, sales) {
-					if (err) res.send(err);
-					// return the sales
-					res.json(sales);
-				});
+	//on routes that end in /sales/accounts/:salesman_id
+	apiRouter.route('/sales/accounts/:salesman_id')
+		.get(function(req,res){
+			Sale.find({ "accountsManager._id": req.params.salesman_id }, function(err, sales) {
+				if (err) res.send(err);
+				// return the sales
+				res.json(sales);
 			});
+		});
+
+	//aggregate function to return totals and other statistics
+	apiRouter.route('/dashboard/total')
+		.get(function(req,res){
+			var dashboard = [];
+			Sale.aggregate(
+				{ $group: {
+					_id: null,
+					total: { $sum: "$value"}
+					}
+				},
+				function (err, result) {
+				if (err) {
+					res.json(err);
+				}
+				res.json(result[0].total);
+			})
+		});
+
+	//aggregate function to return totals and other statistics
+	apiRouter.route('/dashboard/user')
+		.get(function(req,res){
+			var dashboard = [];
+			Sale.aggregate(
+				{ $group: {
+					_id: "$salesman.name",
+					total: { $sum: "$value"}
+					}
+				},
+				function (err, result) {
+				if (err) {
+					res.json(err);
+				}
+				res.json(result);
+			})
+		});
 
 
 	//routes that end in /email================================================

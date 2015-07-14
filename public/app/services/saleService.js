@@ -30,17 +30,30 @@ angular.module('saleService', [])
 		return $http.delete('/api/sales/' + id);
 	};
 
+	//get all sales for a salesman
 	saleFactory.bySalesman = function(id) {
 		return $http.get('api/sales/salesman/' + id);
-	}
+	};
 
+	//get all sales for a project manager
 	saleFactory.byProjectManager = function(id) {
 		return $http.get('api/sales/projectmanager/' + id);
-	}
+	};
 
+	//get all sales for an accounts
 	saleFactory.byAccounts = function(id) {
 		return $http.get('api/sales/accounts/' + id);
-	}
+	};
+
+	//get the total of all sales
+	saleFactory.totalSales = function() {
+		return $http.get('api/dashboard/total/');
+	};
+
+	//get total sales per user
+	saleFactory.userSales = function() {
+		return $http.get('api/dashboard/user/');
+	};
 
 	// return our entire saleFactory object
 	return saleFactory;
