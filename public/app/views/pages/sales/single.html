@@ -34,7 +34,7 @@
 			<div class="col-lg-6">
 				<div class="btn-group">
 					<a ng-if="!sale.saleData.handoverComplete" href="/sales/{{ sale.saleData._id }}/handover" class="btn btn-success">Create Handover</a>
-					<a ng-if="!sale.saleData.accountsEntered" href="/sales/{{ sale.saleData._id }}/accounts" class="btn btn-success">Complete Accounts Process</a>
+					<a ng-if="!sale.saleData.accountsEntered && sale.isAdmin" href="/sales/{{ sale.saleData._id }}/accounts" class="btn btn-success">Complete Accounts Process</a>
 				</div>
 			</div>
 		</div>

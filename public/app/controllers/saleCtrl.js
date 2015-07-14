@@ -1,6 +1,6 @@
 angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailService'])
 
-.controller('saleController', function(Sale, $location) {
+.controller('saleController', function(Sale, User, $location) {
 
 	var vm = this;
 
@@ -16,6 +16,24 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 
 			// bind the sales that come back to vm.sales
 			vm.sales = data;
+		});
+
+	//set the current user and authorisation variables
+	User.current()
+		.success(function(data) {
+			vm.currentUser = data;
+			if (data.role == "admin") {
+				vm.isAdmin = true;
+				vm.isAccounts = true;
+			}
+			else if (data.role == "accounts") {
+				vm.isAdmin = false;
+				vm.isAccounts = true;
+			}
+			else {
+				vm.isAdmin = false;
+				vm.isAccounts = false;
+			}
 		});
 
 	// function to delete a sale
@@ -104,6 +122,24 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 			// bind the users that come back to vm.users
 			vm.users = userData;
 			vm.salesmanID = userData[0].id;
+		});
+
+	//set the current user and authorisation variables
+	User.current()
+		.success(function(data) {
+			vm.currentUser = data;
+			if (data.role == "admin") {
+				vm.isAdmin = true;
+				vm.isAccounts = true;
+			}
+			else if (data.role == "accounts") {
+				vm.isAdmin = false;
+				vm.isAccounts = true;
+			}
+			else {
+				vm.isAdmin = false;
+				vm.isAccounts = false;
+			}
 		});
 
 	//function to complete the handover

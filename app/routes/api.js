@@ -199,6 +199,7 @@ module.exports = function(app, express) {
 				if (req.body.email) user.email = req.body.email;
 				if (req.body.username) user.username = req.body.username;
 				if (req.body.password) user.password = req.body.password;
+				if (req.body.role) user.role = req.body.role;
 
 				// save the user
 				user.save(function(err) {
@@ -233,7 +234,7 @@ module.exports = function(app, express) {
 	apiRouter.get('/current_user', function(req, res) {
 	  User.findOne({
 	    username: req.decoded.username
-	  }).select('_id name username').exec(function(err, user) {
+	  }).select('_id name username role').exec(function(err, user) {
 			if (err) {
 				return res.json(err);
 			} else {

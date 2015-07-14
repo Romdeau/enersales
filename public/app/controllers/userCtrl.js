@@ -18,6 +18,23 @@ angular.module('userCtrl', ['userService', 'mailService', 'saleService'])
 			vm.users = data;
 		});
 
+	User.current()
+		.success(function(data) {
+			vm.currentUser = data;
+			if (data.role == "admin") {
+				vm.isAdmin = true;
+				vm.isAccounts = true;
+			}
+			else if (data.role == "accounts") {
+				vm.isAdmin = false;
+				vm.isAccounts = true;
+			}
+			else {
+				vm.isAdmin = false;
+				vm.isAccounts = false;
+			}
+		});
+
 	// function to delete a user
 	vm.deleteUser = function(id) {
 		vm.processing = true;
@@ -76,6 +93,13 @@ angular.module('userCtrl', ['userService', 'mailService', 'saleService'])
 	// differentiates between create or edit pages
 	vm.type = 'edit';
 
+	// roles definition for dropdown
+	vm.roles = [
+		'user',
+		'admin',
+		'accounts'
+	]
+
 	// get the user data for the user you want to edit
 	// $routeParams is the way we grab data from the URL
 	User.get($routeParams.user_id)
@@ -108,6 +132,18 @@ angular.module('userCtrl', ['userService', 'mailService', 'saleService'])
 	User.current()
 		.success(function(data) {
 			vm.currentUser = data;
+			if (data.role == "admin") {
+				vm.isAdmin = true;
+				vm.isAccounts = true;
+			}
+			else if (data.role == "accounts") {
+				vm.isAdmin = false;
+				vm.isAccounts = true;
+			}
+			else {
+				vm.isAdmin = false;
+				vm.isAccounts = false;
+			}
 			Sale.bySalesman(data._id)
 				.success(function(data) {
 					vm.sales = data;
