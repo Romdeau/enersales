@@ -14,8 +14,15 @@
 	<p>Loading Sales...</p>
 </div>
 <div class="panel panel-default">
-	<div class="panel-body">
-		Search <input type="text" ng-model="search.$">
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="panel-header">
+				<h4>Handover Status ** IM BROKEN **</h4>
+			</div>
+			<div class="panel-body">
+				<select class="form-control" ng-model="search.handoverComplete" ng-options="state for state in sale.state" ></select>
+			</div>
+		</div>
 	</div>
 </div>
 

@@ -9,7 +9,17 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div class="panel-body">
+		<div class="row">
+			<div ng-if="!sale.saleData.handoverComplete" class="col-lg-6 alert alert-info">
+				<p>The Handover for this project is incomplete</p>
+			</div>
+			<div ng-if="!sale.saleData.accountsEntered" class="col-lg-6 alert alert-info">
+				<p>The Accounts process for this project is incomplete</p>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-lg-6">
 				<h4>PO Number: {{ sale.saleData.poNumber }}</h4>
@@ -19,10 +29,8 @@
 			</div>
 			<div class="col-lg-6">
 				<h4>Handover Meeting Date: {{ sale.saleData.meetingDate | date:"dd-MM-yyyy h:mm a"  }}</h4>
-				Quote Number: {{ sale.saleData.quoteNumber }}<br>
-				Description: {{ sale.saleData.description }}<br>
-				Handover Meeting Complete: {{ sale.saleData.handoverComplete }}<br>
-				Accounts Process Complete: {{ sale.saleData.accountsEntered }}
+				<h4>Quote Number: {{ sale.saleData.quoteNumber }}</h4>
+				<p>Description: {{ sale.saleData.description }}</p>
 			</div>
 		</div>
 		<div class="row">

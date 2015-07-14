@@ -7,6 +7,11 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 	// set a processing variable to show loading things
 	vm.processing = true;
 
+	vm.state = [
+		"true",
+		"false"
+	];
+
 	// grab all the sales at page load
 	Sale.all()
 		.success(function(data) {
