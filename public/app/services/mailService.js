@@ -77,7 +77,7 @@ angular.module('mailService', [])
 
     //inject content from mailData
     userArray.toEmail = userData.email;
-    userArray.html = "Hello " + userData.name + "<br/><br/>A user account for <a href='http://enersales.eneraque.com/>Enersales</a> has been created for you. To access it please login with the username " + userData.username + " at <a href='http://enersales.eneraque.com'>enersales.eneraque.com</a>.";
+    userArray.html = "Hello " + userData.name + "<br/><br/>A user account for <a href='http://enersales.eneraque.com'>Enersales</a> has been created for you. To access it please login with the username " + userData.username + " at <a href='http://enersales.eneraque.com'>enersales.eneraque.com</a>.";
 
     //send the email
     return $http.post('/api/email/', userArray);
