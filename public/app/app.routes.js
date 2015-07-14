@@ -45,6 +45,13 @@ angular.module('app.routes', ['ngRoute'])
 			controllerAs: 'user'
 		})
 
+		// page view the current user
+		.when('/current_user/', {
+			templateUrl: 'app/views/pages/users/current.html',
+			controller: 'userCurrentController',
+			controllerAs: 'user'
+		})
+
 		//show all sales
 		.when('/sales', {
 			templateUrl: 'app/views/pages/sales/all.html',

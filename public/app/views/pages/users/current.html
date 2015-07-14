@@ -1,0 +1,75 @@
+<div class="page-header">
+	<h1>
+		Hello {{ user.currentUser.name }}!
+	</h1>
+</div>
+<div class="page-body">
+	<div class="row">
+		<div class="col-lg-4">
+			<h2>Your Sales</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>PO Number</th>
+			    	<th>Customer</th>
+			    	<th>$ Value</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="saleItem in user.sales">
+						<td>{{ saleItem.poNumber }}</td>
+			      <td>{{ saleItem.customer }}</td>
+			      <td>{{ saleItem.value | currency }}</td>
+						<td>
+							<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>
+						</td>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-4">
+			<h2>Your Projects</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>PO Number</th>
+			    	<th>Customer</th>
+			    	<th>$ Value</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="saleItem in user.projects">
+						<td>{{ saleItem.poNumber }}</td>
+			      <td>{{ saleItem.customer }}</td>
+			      <td>{{ saleItem.value | currency }}</td>
+						<td>
+							<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>
+						</td>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-4">
+			<h2>Your Accounts</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>PO Number</th>
+			    	<th>Customer</th>
+			    	<th>$ Value</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="saleItem in user.accounts">
+						<td>{{ saleItem.poNumber }}</td>
+			      <td>{{ saleItem.customer }}</td>
+			      <td>{{ saleItem.value | currency }}</td>
+						<td>
+							<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>
+						</td>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -10,6 +10,11 @@ angular.module('userService', [])
 		return $http.get('/api/users/' + id);
 	};
 
+	// get a single user
+	userFactory.current = function() {
+		return $http.get('/api/current_user/');
+	};
+
 	// get all users
 	userFactory.all = function() {
 		return $http.get('/api/users/');

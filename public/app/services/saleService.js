@@ -30,6 +30,18 @@ angular.module('saleService', [])
 		return $http.delete('/api/sales/' + id);
 	};
 
+	saleFactory.bySalesman = function(id) {
+		return $http.get('api/sales/salesman/' + id);
+	}
+
+	saleFactory.byProjectManager = function(id) {
+		return $http.get('api/sales/projectmanager/' + id);
+	}
+
+	saleFactory.byAccounts = function(id) {
+		return $http.get('api/sales/accounts/' + id);
+	}
+
 	// return our entire saleFactory object
 	return saleFactory;
 

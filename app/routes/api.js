@@ -133,6 +133,8 @@ module.exports = function(app, express) {
 		res.json({ message: 'hooray! welcome to our api!' });
 	});
 
+	// USER ROUTES ===================================================
+
 	// on routes that end in /users
 	// ----------------------------------------------------
 	apiRouter.route('/users')
@@ -220,10 +222,27 @@ module.exports = function(app, express) {
 			});
 		});
 
+	// LOCAL USER ROUTES ====================================
+
 	// api endpoint to get user information
 	apiRouter.get('/me', function(req, res) {
 		res.send(req.decoded);
 	});
+
+	//api call to return current users ID
+	apiRouter.get('/current_user', function(req, res) {
+	  User.findOne({
+	    username: req.decoded.username
+	  }).select('_id name username').exec(function(err, user) {
+			if (err) {
+				return res.json(err);
+			} else {
+				return res.json(user);
+			};
+		});
+	});
+
+	// SALES ROUTES===========================================
 
 	// on routes that end in /sales
 
@@ -319,6 +338,37 @@ module.exports = function(app, express) {
 				res.json({ message: 'Successfully deleted' });
 			});
 		});
+
+	//on routes that end in /sales/salesman/:salesman_id
+	apiRouter.route('/sales/salesman/:salesman_id')
+		.get(function(req,res){
+			Sale.find({ "salesman._id": req.params.salesman_id }, function(err, sales) {
+				if (err) res.send(err);
+				// return the sales
+				res.json(sales);
+			});
+		});
+
+	//on routes that end in /sales/projectmanager/:salesman_id
+	apiRouter.route('/sales/projectmanager/:salesman_id')
+		.get(function(req,res){
+			Sale.find({ "projectManager._id": req.params.salesman_id }, function(err, sales) {
+				if (err) res.send(err);
+				// return the sales
+				res.json(sales);
+			});
+		});
+
+		//on routes that end in /sales/accounts/:salesman_id
+		apiRouter.route('/sales/accounts/:salesman_id')
+			.get(function(req,res){
+				Sale.find({ "accountsManager._id": req.params.salesman_id }, function(err, sales) {
+					if (err) res.send(err);
+					// return the sales
+					res.json(sales);
+				});
+			});
+
 
 	//routes that end in /email================================================
 	apiRouter.route('/email')

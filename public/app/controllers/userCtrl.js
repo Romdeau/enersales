@@ -1,4 +1,4 @@
-angular.module('userCtrl', ['userService', 'mailService'])
+angular.module('userCtrl', ['userService', 'mailService', 'saleService'])
 
 .controller('userController', function(User) {
 
@@ -101,4 +101,24 @@ angular.module('userCtrl', ['userService', 'mailService'])
 			});
 	};
 
+})
+
+.controller('userCurrentController', function(User, Sale) {
+	var vm = this;
+	User.current()
+		.success(function(data) {
+			vm.currentUser = data;
+			Sale.bySalesman(data._id)
+				.success(function(data) {
+					vm.sales = data;
+				});
+			Sale.byProjectManager(data._id)
+				.success(function(data) {
+					vm.projects = data;
+				});
+			Sale.byAccounts(data._id)
+				.success(function(data) {
+					vm.accounts = data;
+				});
+		});
 });
