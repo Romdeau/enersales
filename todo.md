@@ -2,7 +2,7 @@
 
 ##Users
 Password Reset
-User Roles
+~~User Roles~~
 
 ##Sales
 ~~Per user views~~
