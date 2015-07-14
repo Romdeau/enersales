@@ -9,7 +9,8 @@ Password Reset
 Restrict Drop Downs to user roles
 
 ##Dashboard
-Implement a Dashboard
+~~Implement a Dashboard~~
+Implement Charts for the Dashboard
 
 ##Scheduled Emails
 Setup 9am reminder email
