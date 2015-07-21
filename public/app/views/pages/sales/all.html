@@ -20,7 +20,8 @@
 				<h4>Search ** IM BROKEN **</h4>
 			</div>
 			<div class="panel-body">
-				<input class="text" ng-model="search.handoverComplete" ng-options="state for state in sale.state" ng-change="updateSearch(sale.sales)" ></select>
+				<input class="text" ng-model="sale.search" ng-change="sale.updateSearch(sale.search)" ></select>
+				{{sale.search}}
 			</div>
 		</div>
 	</div>
@@ -28,7 +29,7 @@
 
 
 
-<table class="table table-bordered table-striped" ng-show="sale.sales | filter:search">
+<table class="table table-bordered table-striped" ng-show="sale.filtered">
 	<thead>
 		<tr>
 			<th>PO Number</th>
@@ -43,7 +44,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="saleItem in sale.sales">
+		<tr ng-repeat="saleItem in sale.filtered">
 			<td>{{ saleItem.poNumber }}</td>
       <td>{{ saleItem.customer }}</td>
       <td>{{ saleItem.value | currency }}</td>

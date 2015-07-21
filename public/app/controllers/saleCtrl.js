@@ -6,7 +6,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 
 	// set a processing variable to show loading things
 	vm.processing = true;
-
+	vm.search = "";
 	vm.state = [
 		"true",
 		"false"
@@ -21,6 +21,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 
 			// bind the sales that come back to vm.sales
 			vm.sales = data;
+			vm.filtered = data;
 		});
 
 	//set the current user and authorisation variables
@@ -58,6 +59,18 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 					});
 
 			});
+
+	};
+
+	vm.updateSearch = function(searchText) {
+		vm.filtered = [];
+		angular.forEach(vm.sales, function(sale) {
+			if ( sale.poNumber.indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( sale.customer.indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( sale.salesman.name.indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( sale.projectManager != null && sale.projectManager.name.indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( sale.description.indexOf(searchText) >= 0) vm.filtered.push(sale);
+		});
 
 	};
 
