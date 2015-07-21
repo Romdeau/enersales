@@ -10,6 +10,8 @@ Prevent Users Updating users that arent themselves
 ##Sales
 ~~Per user views~~
 
+~~Search~~
+
 Restrict Drop Downs to user roles
 
 Accounts Signoff not appearing
