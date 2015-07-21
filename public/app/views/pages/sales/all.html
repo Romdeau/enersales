@@ -17,10 +17,10 @@
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="panel-header">
-				<h4>Handover Status ** IM BROKEN **</h4>
+				<h4>Search ** IM BROKEN **</h4>
 			</div>
 			<div class="panel-body">
-				<select class="form-control" ng-model="search.handoverComplete" ng-options="state for state in sale.state" ></select>
+				<input class="text" ng-model="search.handoverComplete" ng-options="state for state in sale.state" ng-change="updateSearch(sale.sales)" ></select>
 			</div>
 		</div>
 	</div>
