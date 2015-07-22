@@ -12,6 +12,8 @@ Prevent Users Updating users that arent themselves
 
 ~~Search~~
 
+~~refine search to ignore case~~
+
 Restrict Drop Downs to user roles
 
 Accounts Signoff not appearing

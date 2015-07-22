@@ -64,12 +64,13 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 
 	vm.updateSearch = function(searchText) {
 		vm.filtered = [];
+		searchText = angular.lowercase(searchText);
 		angular.forEach(vm.sales, function(sale) {
 			if ( sale.poNumber.indexOf(searchText) >= 0) vm.filtered.push(sale);
-			else if ( sale.customer.indexOf(searchText) >= 0) vm.filtered.push(sale);
-			else if ( sale.salesman.name.indexOf(searchText) >= 0) vm.filtered.push(sale);
-			else if ( sale.projectManager != null && sale.projectManager.name.indexOf(searchText) >= 0) vm.filtered.push(sale);
-			else if ( sale.description.indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( angular.lowercase(sale.customer).indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( angular.lowercase(sale.salesman.name).indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( sale.projectManager != null && angular.lowercase(sale.projectManager.name).indexOf(searchText) >= 0) vm.filtered.push(sale);
+			else if ( angular.lowercase(sale.description).indexOf(searchText) >= 0) vm.filtered.push(sale);
 		});
 
 	};
