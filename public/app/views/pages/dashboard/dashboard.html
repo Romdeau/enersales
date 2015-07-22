@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="salesman in dashboard.userSales">
+          <tr ng-repeat="salesman in dashboard.userSales | orderBy: '-total'">
       			<td>{{ salesman._id }}</td>
             <td>{{ salesman.total | currency }}</td>
           </tr>

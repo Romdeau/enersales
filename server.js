@@ -30,16 +30,6 @@ mongoose.connect(config.database);
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
 
-// Setup Task schedule
-var rule = new schedule.RecurrenceRule();
-rule.dayofWeek = [new schedule.Range(1,5)];
-rule.hour = 9;
-rule.minute = 0;
-
-var j = schedule.schdeuleJob(rule, function(){
-	
-})
-
 // Setup API Routes ===========================================================
 
 // API ROUTES ------------------------
