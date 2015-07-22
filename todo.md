@@ -14,7 +14,7 @@ Password Reset
 
 ~~refine search to ignore case~~
 
-Restrict Drop Downs to user roles
+~~Restrict Drop Downs to user roles~~
 
 ~~Accounts Signoff not appearing~~
 

@@ -285,6 +285,7 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 
 			// bind the users that come back to vm.users
 			vm.users = data;
+			getAccounts(data);
 		});
 
 	// get the sale data for the sale you want to edit
@@ -293,7 +294,6 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 		.success(function(data) {
 			data.meetingDate = new Date(data.meetingDate);
 			vm.saleData = data;
-			//$scope.formattedDate = new Date(data.meetingDate);
 		});
 
 	// function to save the sale
@@ -311,4 +311,12 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 				$location.path('/sales');
 			});
 	};
+
+	getAccounts = function(data) {
+		vm.accountsUsers = [];
+		angular.forEach(data, function(user) {
+			if (user.role == "accounts")
+				vm.accountsUsers.push(user);
+		});
+	}
 })
