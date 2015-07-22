@@ -119,7 +119,6 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 //controlled applies to view a single sale
 .controller('saleViewController', function($routeParams, Sale, User, $location) {
 	var vm = this;
-
 	var handoverTrue = ({
 		handoverComplete: true
 	});
@@ -189,7 +188,8 @@ angular.module('saleCtrl', ['saleService', 'userService', 'authService', 'mailSe
 						vm.saleData = data;
 					});
 			});
-	};
+	}
+
 })
 
 // controller applied to sale edit page

@@ -3,6 +3,7 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<h3>Customer: {{ sale.saleData.customer}}</h3>
+				{{"Progress " + vm.saleProgress(sale.saleData)}}
 			</div>
 			<div class="col-lg-6">
 				<h3>Project Value: ${{ sale.saleData.value }}</h3>
@@ -13,12 +14,12 @@
 
 	<div class="panel-body">
 		<div class="row">
-			<div ng-if="!sale.saleData.handoverComplete" class="col-lg-6 alert alert-info">
+			<blockquote ng-if="!sale.saleData.handoverComplete" class="col-lg-6">
 				<p>The Handover for this project is incomplete</p>
-			</div>
-			<div ng-if="!sale.saleData.accountsEntered" class="col-lg-6 alert alert-info">
+			</blockquote>
+			<blockquote ng-if="!sale.saleData.accountsEntered" class="col-lg-6 pull-right">
 				<p>The Accounts process for this project is incomplete</p>
-			</div>
+			</blockquote>
 		</div>
 		<div class="row">
 			<div class="col-lg-6">
