@@ -30,7 +30,7 @@
 			<td>{{ person.role }}</td>
 			<td>{{ person.username }}</td>
 			<td class="col-sm-3">
-				<a ng-href="/users/{{ person._id }}" class="btn btn-primary">Edit</a>
+				<a ng-if="user.isAdmin || person._id == user.currentUser._id" ng-href="/users/{{ person._id }}" class="btn btn-primary">Edit</a>
 				<a ng-if="user.isAdmin" ng-href="/users/role/{{ person._id }}" class="btn btn-info">Role</a>
 				<a ng-if="user.isAdmin" href="#" ng-click="user.deleteUser(person._id)" class="btn btn-danger">Delete</a>
 			</td>
