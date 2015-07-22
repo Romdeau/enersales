@@ -5,7 +5,7 @@ Password Reset
 
 ~~User Roles~~
 
-Prevent Users Updating users that arent themselves
+~~Prevent Users Updating users that arent themselves~~
 
 ##Sales
 ~~Per user views~~
@@ -20,6 +20,12 @@ Restrict Drop Downs to user roles
 
 ##Dashboard
 ~~Implement a Dashboard~~
+
+Order table by sales
+
+Create sales for month
+
+Create sales for year
 
 Implement Charts for the Dashboard
 
