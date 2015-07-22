@@ -4,10 +4,11 @@
 	</h1>
 </div>
 <div class="page-body">
-  <h2>Total Sales: {{ dashboard.total | currency }}</h2>
+  <h3>Total Sales: {{ dashboard.total | currency }}</h3>
   <div class="row">
     <div class="col-lg-4">
-      <table class="table table-bordered table-striped" ng-show="dashboard.userSales">
+      <h5>Sales to Date</h5>
+			<table class="table table-bordered table-striped" ng-show="dashboard.userSales">
       	<thead>
       		<tr>
             <th>Name</th>
@@ -22,8 +23,39 @@
         </tbody>
       </table>
     </div>
-    <div class="col-lg-8">
-
+		<div class="col-lg-4">
+      <h5>Sales for Year</h5>
+			<table class="table table-bordered table-striped" ng-show="dashboard.userSales">
+      	<thead>
+      		<tr>
+            <th>Name</th>
+            <th>Total Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="salesman in dashboard.userSales | orderBy: '-total'">
+      			<td>{{ salesman._id }}</td>
+            <td>{{ salesman.total | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+		<div class="col-lg-4">
+      <h5>Sales to Month</h5>
+			<table class="table table-bordered table-striped" ng-show="dashboard.userSales">
+      	<thead>
+      		<tr>
+            <th>Name</th>
+            <th>Total Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="salesman in dashboard.userSales | orderBy: '-total'">
+      			<td>{{ salesman._id }}</td>
+            <td>{{ salesman.total | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

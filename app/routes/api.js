@@ -268,7 +268,7 @@ module.exports = function(app, express) {
 
 		// create a sale (accessed at POST http://localhost:8080/sales)
 		.post(function(req, res) {
-
+			var now = new Date();
 			var sale = new Sale();		// create a new instance of the Sale model
 			sale.poNumber = req.body.poNumber; // set the sale attributes (comes from the request)
 			sale.customer = req.body.customer;
@@ -278,6 +278,7 @@ module.exports = function(app, express) {
 			sale.quoteNumber = req.body.quoteNumber;
 			sale.meetingDate = req.body.meetingDate;
 			sale.projectManager = req.body.projectManager;
+			sale.createdAt = now;
 
 			sale.save(function(err) {
 				if (err) {
@@ -412,6 +413,46 @@ module.exports = function(app, express) {
 			Sale.aggregate(
 				{ $group: {
 					_id: "$salesman.name",
+					total: { $sum: "$value"}
+					}
+				},
+				function (err, result) {
+				if (err) {
+					res.json(err);
+				}
+				res.json(result);
+			})
+		});
+
+	//aggregate function to return totals and other statistics
+	apiRouter.route('/dashboard/year')
+		.get(function(req,res){
+			var dashboard = [];
+			Sale.aggregate(
+				{ $group: {
+					_id: "$salesman.name",
+					total: { $sum: "$value"}
+					}
+				},
+				function (err, result) {
+				if (err) {
+					res.json(err);
+				}
+				res.json(result);
+			})
+		});
+	//aggregate function to return totals and other statistics
+	apiRouter.route('/dashboard/month')
+		.get(function(req,res){
+			var dashboard = [];
+			Sale.aggregate(
+				{ $sort: {
+					createdAt: -1,
+					}
+				},
+				{ $group: {
+					_id: {$month: "$createdAt"},
+					name: {$first: "$salesman.username"},
 					total: { $sum: "$value"}
 					}
 				},

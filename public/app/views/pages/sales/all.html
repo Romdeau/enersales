@@ -54,7 +54,7 @@
       <td>{{ saleItem.projectManager.name }}</td>
 			<td>
 				<a ng-href="/sales/{{ saleItem._id }}" class="btn btn-primary">Show</a>
-				<a ng-if="user.isAdmin" href="#" ng-click="sale.deleteSale(saleItem._id)" class="btn btn-danger">Delete</a>
+				<a ng-if="sale.isAdmin" href="#" ng-click="sale.deleteSale(saleItem._id)" class="btn btn-danger">Delete</a>
 			</td>
 		</tr>
 	</tbody>

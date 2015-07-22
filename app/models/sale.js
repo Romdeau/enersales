@@ -13,7 +13,8 @@ var SaleSchema   = new Schema({
 	projectManager: { type: Schema.Types.Mixed },
 	accountsManager: { type: Schema.Types.Mixed },
 	handoverComplete: { type: Boolean, default: false },
-	accountsEntered: { type: Boolean, default: false }
+	accountsEntered: { type: Boolean, default: false },
+	createdAt: Date
 });
 
 module.exports = mongoose.model('Sale', SaleSchema);

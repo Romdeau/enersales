@@ -21,13 +21,13 @@ Password Reset
 ##Dashboard
 ~~Implement a Dashboard~~
 
-Order table by sales
+~~Order table by sales~~
 
 Create sales for month
 
 Create sales for year
 
-Implement Charts for the Dashboard
+Implement Charts for the Dashboard (angular-chart.js)
 
 ##Scheduled Emails
 Setup 9am reminder email
