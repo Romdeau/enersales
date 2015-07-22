@@ -6,6 +6,7 @@ var morgan     = require('morgan'); 		// used to see requests
 var mongoose   = require('mongoose');
 var config 	   = require('./config');
 var path 	   = require('path');
+var schedule = require('node-schedule');
 
 // use body parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +29,16 @@ mongoose.connect(config.database);
 // set static files location
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
+
+// Setup Task schedule
+var rule = new schedule.RecurrenceRule();
+rule.dayofWeek = [new schedule.Range(1,5)];
+rule.hour = 9;
+rule.minute = 0;
+
+var j = schedule.schdeuleJob(rule, function(){
+	
+})
 
 // Setup API Routes ===========================================================
 

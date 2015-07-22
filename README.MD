@@ -14,3 +14,8 @@ After that just run
 >node server.js
 
 and you should be in business.
+
+##Obvious Security Problems
+I'm using unauthenticated routes for email, if your API is internet accessible it can be used to spam people which is bad as you're essentially an open relay.
+
+I'm using a super accounts system from a tutorial, it really should be using something that is actively maintained like Passport.JS

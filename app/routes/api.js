@@ -88,6 +88,23 @@ module.exports = function(app, express) {
 		});
 	})
 
+	//routes that end in /email================================================
+	apiRouter.route('/scheduleEmail')
+		//post route for schedule emails at 9am
+		.post(function(req, res){
+			var data = req.body;
+
+			transporter.sendMail({
+				from: config.emailFrom,
+				to: data.toEmail,
+				subject: data.subject,
+				text: data.text,
+				html: data.html
+			});
+
+			res.json({ message: 'Successfully emailed' });
+		});
+
 	// route middleware to verify a token
 	apiRouter.use(function(req, res, next) {
 		// do logging

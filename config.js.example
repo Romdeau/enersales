@@ -3,6 +3,7 @@ module.exports = {
 	'database': 'mongodb://localhost:27017/enersales', //mongo connection string
 	'secret': 'thisisafairlypooryetfairlylongapplicationsecret', //application secret
 	'emailServer': 'your.mail.domain', // your mail domain
-	'emailPort': 25, // your mail port
+	'emailPort': 25, // your mail port,
+	'emailFrom': 'noreply@yourdomain.com'
 	//NB: if your mail server need authentication (and it probably does) you'll need to edit the transporter variable in /app/api
 };
